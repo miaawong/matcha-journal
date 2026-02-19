@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: matcha_db
+    restart: always
+    environment:
+      - POSTGRES_USER=matcha_user
+      - POSTGRES_PASSWORD=matcha_password
+      - POSTGRES_DB=matcha_journal
+    ports:
+      - "5432:5432"
+    
+    volumes: #ensures data is saved on hard drive, so it wont disappear on restart
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
